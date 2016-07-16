@@ -1,5 +1,6 @@
 # Simple Modal
-[![Build status][travis-badge]][travis-url] [![Bower dependencies][bowerdeps-badge]][bowerdeps-url] ![Version][bower-badge]
+[![Build status][travis-badge]][travis-url] [![Bower dependencies][bowerdeps-badge]][bowerdeps-url] ![Version][bower-badge] ![Size][size-badge]
+<br/>[![Cross browser test status][browser-badges]][travis-url]
 
 Simple, style-agnostic modal with basic controls and events.
 
@@ -107,3 +108,5 @@ MIT © [Simpla](https://www.simpla.io)
 [travis-url]: https://travis-ci.org/SimpleElements/simple-modal
 [bowerdeps-badge]: https://img.shields.io/gemnasium/SimpleElements/simple-modal.svg
 [bowerdeps-url]: https://gemnasium.com/bower/simple-modal
+[size-badge]: https://badges.herokuapp.com/size/github/SimpleElements/simple-modal/master/simple-modal.html?gzip=true&color=blue
+[browser-badges]: https://badges.herokuapp.com/travis/SimpleElements/simple-modal/sauce/SimpleElements?labels=none
