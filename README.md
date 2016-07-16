@@ -1,5 +1,5 @@
-# simple-modal
-![][bower-badge] [![][travis-badge]][travis-url] [![][bowerdeps-badge]][bowerdeps-url]
+# Simple Modal
+[![Build status][travis-badge]][travis-url] [![Bower dependencies][bowerdeps-badge]] [bowerdeps-url]![Version][bower-badge]
 
 Simple, style-agnostic modal with basic controls and events.
 
