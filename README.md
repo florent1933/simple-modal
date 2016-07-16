@@ -102,8 +102,7 @@ MIT © [Simpla](https://www.simpla.io)
 
 [webcomponents]: https://github.com/webcomponents/webcomponentsjs
 
-[bower-badge]: https://img.shields.io/bower/v/simple-modal.svg
-[bowerlicense-badge]: https://img.shields.io/bower/l/simple-modal.svg
+[bower-badge]: https://img.shields.io/bower/v/simple-modal-element.svg
 [travis-badge]: https://img.shields.io/travis/SimpleElements/simple-modal.svg
 [travis-url]: https://travis-ci.org/SimpleElements/simple-modal
 [bowerdeps-badge]: https://img.shields.io/gemnasium/SimpleElements/simple-modal.svg
