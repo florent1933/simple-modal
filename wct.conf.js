@@ -2,6 +2,8 @@ module.exports = {
   plugins: {
     sauce: {
       disabled: true,
+      commandTimeout: 600,
+      idleTimeout: 300,
       browsers: [
         'mac/chrome',
         'windows/chrome',
