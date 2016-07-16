@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+    <title>Simple Modal Demo</title>
+
+     <!-- Import Web Components polyfill -->
+    <script src="../../webcomponentsjs/webcomponents-lite.min.js"></script>
+
+    <!-- Use shadow DOM if available -->
+    <script>
+      window.Polymer = { dom: 'shadow' };
+    </script>
+
+    <!-- Import element -->
+    <link rel="import" href="../simple-modal.html">
+
+    <style is="custom-style">
+      simple-modal {
+        --simple-modal-width: 400px;
+        font-family: sans-serif;
+      }
+    </style>
+  </head>
+  <body unresolved>
+
+    <button id="button">open modal</button>
+
+    <simple-modal id="modal" title="My Modal">
+      My modal's content
+    </simple-modal>
+
+    <script>
+      document.querySelector('#button').addEventListener('click', function() {
+        document.querySelector('#modal').open();
+      });
+    </script>
+
+  </body>
+</html>

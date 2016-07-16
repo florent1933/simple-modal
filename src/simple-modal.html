@@ -1,0 +1,105 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../simple-button/simple-button.html">
+<link rel="import" href="../iron-icons/iron-icons.html">
+
+<dom-module id="simple-modal">
+  <template>
+    <style>
+      :host, *, *::before, *::after {
+        box-sizing: border-box;
+        -moz-osx-font-smoothing: grayscale;
+         -webkit-font-smoothing: antialiased;
+                 font-smoothing: antialiased;
+      }
+
+      :host {
+        position: fixed;
+        display: none;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        overflow: scroll;
+        padding: 1rem;
+        z-index: 9999999;
+      }
+
+      :host([visible]) {
+        display: flex;
+      }
+
+      /* Click-to-escape target */
+      .overlay {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background: var(--simple-modal-overlay, rgba(0,0,0, 0.4));
+      }
+
+      .modal {
+        display: inline-block;
+        position: relative;
+        background: white;
+        width: 100%;
+        height: var(--simple-modal-height, auto);
+        min-height: 100px;
+        max-width: var(--simple-modal-width, auto);
+        margin: auto;
+        overflow: hidden;
+        box-shadow: 0 1px 1px rgba(0,0,0,0.2);
+        z-index: 1;
+        @apply(--simple-modal);
+      }
+
+      .modal__title {
+        text-align: center;
+        line-height: 1;
+        @apply(--simple-modal-title);
+      }
+
+      .modal__content {
+        padding: var(--simple-modal-padding, 30px);
+        overflow: auto;
+      }
+
+      .modal__close {
+        --simple-button-icon-size: var(--simple-modal-close-size, 14px);
+        position: absolute;
+        top: 10px;
+        right: 13px;
+        color: var(--simple-modal-close-color, rgba(0,0,0,0.6));
+        opacity: 0.7;
+        @apply(--simple-modal-close);
+      }
+
+      .modal__close:hover {
+        opacity: 1;
+      }
+    </style>
+
+    <div class="overlay" id="overlay"></div>
+
+    <div class="modal" id="modal">
+      <button
+        is="simple-button"
+        hidden$="[[noExit]]"
+        class="modal__close"
+        id="close"
+        on-tap="close"
+        icon="icons:close">
+      </button>
+
+      <h1 class="modal__title" hidden$="[[!title]]">[[title]]</h1>
+
+      <div class="modal__content">
+        <content></content>
+      </div>
+    </div>
+  </template>
+
+  <script src="../web-animations-js/web-animations-next.min.js"></script>
+  <script src="../es6-promise/promise.min.js"></script>
+  <script src="./simple-modal.js" inline></script>
+</dom-module>

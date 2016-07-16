@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>simple-modal</title>
+    <script src="../../webcomponentsjs/webcomponents.min.js"></script>
+    <script src="../../web-component-tester/browser.js"></script>
+    <script src="../../test-fixture/test-fixture-mocha.js"></script>
+    <link rel="import" href="../../test-fixture/test-fixture.html">
+
+    <!-- Utility for flushing animations in tests -->
+    <script src="../../web-animations-js/web-animations-next.min.js"></script>
+    <script>
+      window.flushAnimations = function() {
+        document.timeline.getAnimations().forEach(function(animation) {
+          animation.finish();
+        });
+      }
+    </script>
+
+    <!-- Import the element to test -->
+    <link rel="import" href="../simple-modal.html">
+
+    <!-- Setup fixtures -->
+    <script>
+      (function() {
+        window.fixtures = window.fixtures || {};
+        window.fixtures['simple-modal'] = {};
+      })();
+    </script>
+
+  </head>
+  <body>
+    <test-fixture id="default">
+      <template>
+        <simple-modal></simple-modal>
+      </template>
+    </test-fixture>
+    <script>
+      describe('<simple-modal>', function() {
+
+        var component,
+            componentFixtures;
+
+        componentFixtures = window.fixtures;
+
+        beforeEach(function() {
+          component = fixture('default');
+        });
+
+        it('is okay', function() {
+          expect(component).to.be.ok;
+        });
+
+        it('becomes visible when active true', function() {
+          component.active = true;
+          expect(component.visible).to.be.true;
+        });
+
+        describe('closing', function() {
+
+          it('makes visible false when active false', function() {
+            component.active = true;
+            window.flushAnimations();
+
+            setTimeout(function() {
+              component.active = false;
+              window.flushAnimations();
+            }, 0);
+
+            setTimeout(function() {
+              expect(component.visible).to.be.false;
+            }, 0);
+          });
+
+          it('closes on overlay tap', function() {
+            component.active = true;
+            window.flushAnimations();
+
+            setTimeout(function() {
+              component.$.overlay.click();
+              expect(component.active).to.be.false;
+            }, 0);
+          });
+
+          it('closes on escape key', function() {
+            component.active = true;
+            window.flushAnimations();
+
+            setTimeout(function() {
+              component.fire('keyup', { keyCode: 27 }, { node: document.body });
+              expect(component.active).to.be.false;
+            }, 0);
+          });
+
+        });
+
+      });
+    </script>
+  </body>
+</html>
