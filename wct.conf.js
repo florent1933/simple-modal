@@ -3,7 +3,7 @@ module.exports = {
     sauce: {
       disabled: true,
       commandTimeout: 600,
-      idleTimeout: 300,
+      idleTimeout: 1000,
       browsers: [
         'mac/chrome',
         'windows/chrome',
