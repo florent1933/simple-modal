@@ -2,7 +2,7 @@
 [![Build status][travis-badge]][travis-url] [![Bower dependencies][bowerdeps-badge]][bowerdeps-url] ![Version][bower-badge] ![Size][size-badge]
 <br/>[![Cross browser test status][browser-badges]][travis-url]
 
-Simple, style-agnostic modal with basic controls and events.
+Simple, style-agnostic modal element.
 
 ## Installation & usage
 
