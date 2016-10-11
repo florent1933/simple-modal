@@ -69,9 +69,7 @@ Simple modal is easily styleable with custom properties and CSS mixins
 
 Property                      | Default            | Description                                   
 ----------------------------- | ------------------ | ------------                                  
-`--simple-modal-overlay`      | `rgba(0,0,0, 0.4)` | Color of the screen overlay when modal active 
-`--simple-modal-height`       | `auto`             | Height of the modal                           
-`--simple-modal-width`        | `auto`             | Max width of the modal                        
+`--simple-modal-overlay`      | `rgba(0,0,0, 0.4)` | Color of the screen overlay when modal active                         
 `--simple-modal-padding`      | `40px`             | Padding inside the modal dialog               
 `--simple-modal-close-size`   | `14px`             | Size of the close button                      
 `--simple-modal-close-color`  | `rgba(0,0,0,0.6)`  | Color of the close button                     
