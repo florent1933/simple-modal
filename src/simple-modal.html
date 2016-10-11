@@ -1,6 +1,14 @@
 <link rel="import" href="../polymer/polymer.html">
-<link rel="import" href="../simple-button/simple-button.html">
-<link rel="import" href="../iron-icons/iron-icons.html">
+<link rel="import" href="../simple-button/simple-button.html" async>
+<link rel="import" href="../iron-iconset-svg/iron-iconset-svg.html" async>
+
+<iron-iconset-svg name="modal" size="16">
+  <svg>
+    <defs>
+      <g id="close"><path d="M9.793 8.001l3.048 3.048c0.198 0.198 0.198 0.52 0 0.717l-1.075 1.075c-0.198 0.198-0.519 0.198-0.717 0l-3.049-3.048-3.049 3.048c-0.198 0.198-0.519 0.198-0.717 0l-1.076-1.075c-0.198-0.198-0.198-0.519 0-0.717l3.049-3.048-3.049-3.049c-0.198-0.198-0.198-0.519 0-0.718l1.076-1.075c0.198-0.198 0.519-0.198 0.717 0l3.048 3.048 3.048-3.049c0.198-0.198 0.519-0.198 0.717 0l1.075 1.076c0.198 0.198 0.198 0.519 0 0.718l-3.048 3.048z"></path></g>
+    </defs>
+  </svg>
+</iron-iconset-svg>
 
 <dom-module id="simple-modal">
   <template>
@@ -84,7 +92,7 @@
         class="modal__close"
         id="close"
         on-tap="close"
-        icon="icons:close">
+        icon="modal:close">
       </button>
 
       <h1 class="modal__title" hidden$="[[!title]]">[[title]]</h1>
