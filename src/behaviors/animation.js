@@ -11,14 +11,15 @@ const EASINGS = {
           ],
           opts: {
             open: {
-              easing: EASINGS.decelerate,
+              easing: EASINGS.standard,
               fill: 'both',
-              duration: 120,
+              duration: 140,
             },
             close: {
-              easing: EASINGS.accelerate,
+              easing: EASINGS.decelerate,
               fill: 'both',
-              duration: 100
+              offset: 20,
+              duration: 90
             }
           }
         },
@@ -31,12 +32,13 @@ const EASINGS = {
             open: {
               easing: 'ease',
               fill: 'both',
-              duration: 230
+              duration: 270
             },
             close: {
               easing: 'ease',
               fill: 'both',
-              duration: 170
+              offset: 20,
+              duration: 120
             }
           }
         }
@@ -52,50 +54,35 @@ export default {
 
   },
 
-  observers: [
-    '_toggleModal(active)'
-  ],
-
-  /**
-   * Animation observer for the active property
-   * @param  {Boolean} active   Current state of the active property
-   * @param  {Boolean} previous Previous state of the active property
-   * @return {undefined}
-   */
-  _toggleModal(active, previous) {
-    if (active) {
-      this._openModal();
-    } else if (previous) {
-      this._closeModal();
-    }
-  },
-
   /**
    * Animate the modal open and give it a visible attribute
    * @return {undefined}
    */
-  _openModal() {
+  animateModalOpen() {
+    let overlay = ANIMATIONS.overlay,
+        modal = ANIMATIONS.modal;
+
     this.visible = true;
-    this.$.overlay.animate(OVERLAY.frames, OVERLAY.opts.open);
-    this.$.modal.animate(MODAL.frames, MODAL.opts.open);
+    this.$.overlay.animate(overlay.frames, overlay.opts.open);
+    this.$.modal.animate(modal.frames, modal.opts.open);
   },
 
   /**
    * Animate the modal close and remove the visible attribute
    * @return {undefined}
    */
-  _closeModal() {
-    let overlay,
-        modal,
-        overlayFrames = OVERLAY.frames.slice().reverse(),
-        modalFrames = MODAL.frames.slice().reverse();
+  animateModalClosed() {
+    let modalAnimation,
+        overlayAnimation,
+        overlay = ANIMATIONS.overlay,
+        modal = ANIMATIONS.modal;
 
-    overlay = this.$.overlay.animate(overlayFrames, OVERLAY.opts.close);
-    modal = this.$.modal.animate(modalFrames, MODAL.opts.close);
+    overlayAnimation = this.$.overlay.animate(overlay.frames.slice().reverse(), overlay.opts.close);
+    modalAnimation = this.$.modal.animate(modal.frames.slice().reverse(), modal.opts.close);
 
     Promise.all([
-      overlay.finished,
-      modal.finished
+      modalAnimation.finished,
+      overlayAnimation.finished
     ]).then(() => this.visible = false);
   }
 

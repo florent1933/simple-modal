@@ -47,8 +47,10 @@ class SimpleModal {
    */
   _activeChanged(active, previous) {
     if (active) {
+      this.animateModalOpen()
       this.fire('simple-modal-opened');
     } else if (previous) {
+      this.animateModalClosed()
       this.fire('simple-modal-closed');
     }
   }
