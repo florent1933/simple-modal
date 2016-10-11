@@ -51,13 +51,14 @@ export default {
 
   /**
    * Animation observer for the active property
-   * @param  {Boolean} active Current state of the active property
+   * @param  {Boolean} active   Current state of the active property
+   * @param  {Boolean} previous Previous state of the active property
    * @return {undefined}
    */
-  _toggleModal(active) {
+  _toggleModal(active, previous) {
     if (active) {
       this._openModal();
-    } else {
+    } else if (previous) {
       this._closeModal();
     }
   },

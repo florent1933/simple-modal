@@ -41,13 +41,14 @@ class SimpleModal {
 
   /**
    * Observer for the active property, fires events on change
-   * @param  {Boolean} active Current state of the active property
+   * @param  {Boolean} active   Current state of the active property
+   * @param  {Boolean} previous Previous state of the active property
    * @return {undefined}
    */
-  _activeChanged(active) {
+  _activeChanged(active, previous) {
     if (active) {
       this.fire('simple-modal-opened');
-    } else {
+    } else if (previous) {
       this.fire('simple-modal-closed');
     }
   }
@@ -79,14 +80,6 @@ class SimpleModal {
   }
 
   /**
-   * Close the modal on overlay tap
-   * @return {undefined}
-   */
-  _closeOnOverlay() {
-    this.listen(this.$.overlay, 'tap', 'close');
-  }
-
-  /**
    * Close the modal on escape key press
    * @return {undefined}
    */
@@ -103,7 +96,6 @@ class SimpleModal {
    * @return {undefined}
    */
   attached() {
-    this._closeOnOverlay();
     this._closeOnEscape();
   }
 
