@@ -1,36 +1,43 @@
-const MODAL = {
-        frames: [
-          { transform: 'scale(0.75, 0.95)', opacity: 0 },
-          { transform: 'scale(1, 1)', opacity: 1 }
-        ],
-        opts: {
-          open: {
-            easing: 'cubic-bezier(0.215, 0.61, 0.355, 1)',
-            fill: 'both',
-            duration: 120,
-          },
-          close: {
-            easing: 'cubic-bezier(0.215, 0.61, 0.355, 1)',
-            fill: 'both',
-            duration: 100
-          }
-        }
+const EASINGS = {
+        standard: 'cubic-bezier(0.4, 0.0, 0.2, 1)',
+        accelerate: 'cubic-bezier(0.4, 0.0, 1, 1)',
+        decelerate: 'cubic-bezier(0.0, 0.0, 0.2, 1)'
       },
-      OVERLAY = {
-        frames: [
-          { opacity: 0 },
-          { opacity: 1 }
-        ],
-        opts: {
-          open: {
-            easing: 'ease',
-            fill: 'both',
-            duration: 230
-          },
-          close: {
-            easing: 'ease',
-            fill: 'both',
-            duration: 170
+      ANIMATIONS = {
+        modal: {
+          frames: [
+            { transform: 'scale(0.75, 0.95)', opacity: 0 },
+            { transform: 'scale(1, 1)', opacity: 1 }
+          ],
+          opts: {
+            open: {
+              easing: EASINGS.decelerate,
+              fill: 'both',
+              duration: 120,
+            },
+            close: {
+              easing: EASINGS.accelerate,
+              fill: 'both',
+              duration: 100
+            }
+          }
+        },
+        overlay: {
+          frames: [
+            { opacity: 0 },
+            { opacity: 1 }
+          ],
+          opts: {
+            open: {
+              easing: 'ease',
+              fill: 'both',
+              duration: 230
+            },
+            close: {
+              easing: 'ease',
+              fill: 'both',
+              duration: 170
+            }
           }
         }
       };
