@@ -72,7 +72,7 @@ Property                      | Default            | Description
 `--simple-modal-overlay`      | `rgba(0,0,0, 0.4)` | Color of the screen overlay when modal active                         
 `--simple-modal-padding`      | `40px`             | Padding inside the modal dialog               
 `--simple-modal-close-size`   | `14px`             | Size of the close button                      
-`--simple-modal-close-color`  | `rgba(0,0,0,0.6)`  | Color of the close button                     
+`--simple-modal-close-color`  | `rgba(0,0,0,0.45)`  | Color of the close button                     
 
 Apply properties on simple-modal
 
