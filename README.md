@@ -9,7 +9,7 @@ Simple, style-agnostic modal element.
 Install simple-modal with Bower
 
 ```sh
-$ bower install SimpleElements/simple-modal --save
+$ bower install simple-modal-element --save
 ```
 
 Import it into the `<head>` of your page
@@ -107,6 +107,6 @@ MIT © [Simpla](https://www.simpla.io)
 [travis-badge]: https://img.shields.io/travis/SimpleElements/simple-modal.svg
 [travis-url]: https://travis-ci.org/SimpleElements/simple-modal
 [bowerdeps-badge]: https://img.shields.io/gemnasium/SimpleElements/simple-modal.svg
-[bowerdeps-url]: https://gemnasium.com/bower/simple-modal
+[bowerdeps-url]: https://gemnasium.com/bower/simple-modal-element
 [size-badge]: https://badges.herokuapp.com/size/github/SimpleElements/simple-modal/master/simple-modal.html?gzip=true&color=blue
 [browser-badges]: https://badges.herokuapp.com/travis/SimpleElements/simple-modal/sauce/SimpleElements?labels=none
