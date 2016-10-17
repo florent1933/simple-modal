@@ -71,18 +71,18 @@ export default {
    * @return {undefined}
    */
   animateModalClosed() {
-    let modalAnimation,
-        overlayAnimation,
+    let animations,
         overlay = ANIMATIONS.overlay,
-        modal = ANIMATIONS.modal;
+        modal = ANIMATIONS.modal,
+        toPromise = (animation) => new Promise((resolve) => animation.onfinish = resolve);
 
-    overlayAnimation = this.$.overlay.animate(overlay.frames.slice().reverse(), overlay.opts.close);
-    modalAnimation = this.$.modal.animate(modal.frames.slice().reverse(), modal.opts.close);
+      animations = [
+        this.$.overlay.animate(overlay.frames.slice().reverse(), overlay.opts.close),
+        this.$.modal.animate(modal.frames.slice().reverse(), modal.opts.close)
+      ];
 
-    Promise.all([
-      modalAnimation.finished,
-      overlayAnimation.finished
-    ]).then(() => this.visible = false);
+    Promise.all(animations.map(toPromise))
+      .then(() => this.visible = false);
   }
 
 };
