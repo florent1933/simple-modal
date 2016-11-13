@@ -6,8 +6,8 @@ const EASINGS = {
       ANIMATIONS = {
         modal: {
           frames: [
-            { transform: 'scale(0.75, 0.95)', opacity: 0 },
-            { transform: 'scale(1, 1)', opacity: 1 }
+            { transform: 'translateZ(0), scale(0.75, 0.95)', opacity: 0 },
+            { transform: 'translateZ(0), scale(1, 1)', opacity: 1 }
           ],
           opts: {
             open: {
