@@ -47,10 +47,12 @@ class SimpleModal {
    */
   _activeChanged(active, previous) {
     if (active) {
-      this.animateModalOpen()
+      this.animateModalOpen();
+      this._toggleBodyLock(true);
       this.fire('simple-modal-opened');
     } else if (previous) {
-      this.animateModalClosed()
+      this.animateModalClosed();
+      this._toggleBodyLock(false);
       this.fire('simple-modal-closed');
     }
   }
@@ -79,6 +81,22 @@ class SimpleModal {
    */
   getModal() {
     return this.$.modal;
+  }
+
+
+  /**
+   * Toggles locking the <body> element with overflow hidden
+   * @param  {Boolean} lock Whether to lock or unlock the body
+   * @return {undefined}
+   */
+  _toggleBodyLock(lock) {
+    let body = document.body;
+
+    if (lock) {
+      body.style.overflow = 'hidden';
+    } else {
+      body.style.overflow = '';
+    }
   }
 
   /**
