@@ -99,10 +99,10 @@ simple-modal {
 
 ## Events
 
-Event                  | Description             
----------------------- | ------------            
-`simple-modal-opened`  | Fired when modal opens  
-`simple-modal-closed`  | Fired when modal closed 
+Event     | Description             
+----------| ------------            
+`opened`  | Fired when modal opens  
+`closed`  | Fired when modal closed 
 
 -- 
 

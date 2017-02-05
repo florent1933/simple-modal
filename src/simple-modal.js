@@ -49,11 +49,11 @@ class SimpleModal {
     if (active) {
       this.animateModalOpen();
       this._toggleBodyLock(true);
-      this.fire('simple-modal-opened');
+      this.fire('opened');
     } else if (previous) {
       this.animateModalClosed();
       this._toggleBodyLock(false);
-      this.fire('simple-modal-closed');
+      this.fire('closed');
     }
   }
 
