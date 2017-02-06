@@ -1,6 +1,6 @@
 {
   "name": "simple-modal",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Simple style-agnostic modal element",
   "main": "simple-modal.html",
   "scripts": {
