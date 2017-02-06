@@ -86,6 +86,11 @@
       .modal__close:hover {
         opacity: 1;
       }
+
+      /* Patch [hidden] on IE*/
+      [hidden] {
+        display: none !important;
+      }
     </style>
 
     <div class="overlay" id="overlay" on-tap="close"></div>
