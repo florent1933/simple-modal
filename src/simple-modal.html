@@ -15,9 +15,6 @@
     <style>
       :host, *, *::before, *::after {
         box-sizing: border-box;
-        -moz-osx-font-smoothing: grayscale;
-         -webkit-font-smoothing: antialiased;
-                 font-smoothing: antialiased;
       }
 
       :host {
@@ -30,6 +27,9 @@
         overflow: scroll;
         padding: 1rem;
         z-index: 9999999;
+        -moz-osx-font-smoothing: grayscale;
+         -webkit-font-smoothing: antialiased;
+                 font-smoothing: antialiased;
       }
 
       :host([visible]) {
@@ -43,6 +43,7 @@
         right: 0;
         bottom: 0;
         left: 0;
+        cursor: pointer;
         background: var(--simple-modal-overlay, rgba(0,0,0, 0.2));
       }
 
@@ -76,9 +77,10 @@
         position: absolute;
         top: 10px;
         right: 13px;
-        color: var(--simple-modal-close-color, rgba(0,0,0,0.45));
-        opacity: 0.7;
-        @apply(--simple-modal-close);
+        color: var(--simple-modal-close-color, rgba(40,40,40, 0.8));
+        opacity: 0.5;
+        cursor: pointer;
+        @apply(--simple-modal-close)
       }
 
       .modal__close:hover {
