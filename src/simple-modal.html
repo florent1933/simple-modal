@@ -43,7 +43,7 @@
         right: 0;
         bottom: 0;
         left: 0;
-        background: var(--simple-modal-overlay, rgba(0,0,0, 0.4));
+        background: var(--simple-modal-overlay, rgba(0,0,0, 0.2));
       }
 
       .modal {
@@ -52,8 +52,10 @@
         background: white;
         margin: auto;
         overflow: hidden;
-        box-shadow: 0 1px 1px rgba(0,0,0,0.2);
         z-index: 1;
+        box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14),
+                    0 1px 18px 0 rgba(0, 0, 0, 0.12),
+                    0 3px 5px -1px rgba(0, 0, 0, 0.4);
         @apply(--simple-modal);
       }
 
@@ -69,7 +71,8 @@
       }
 
       .modal__close {
-        --simple-button-icon-size: var(--simple-modal-close-size, 14px);
+        --iron-icon-width: var(--simple-modal-close-size, 14px);
+        --iron-icon-height: var(--simple-modal-close-size, 14px);
         position: absolute;
         top: 10px;
         right: 13px;

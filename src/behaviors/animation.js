@@ -13,12 +13,13 @@ const EASINGS = {
             open: {
               easing: EASINGS.standard,
               fill: 'both',
-              duration: 140,
+              duration: 150,
+              delay: 130,
             },
             close: {
               easing: EASINGS.standard,
               fill: 'both',
-              duration: 100
+              duration: 120
             }
           }
         },
@@ -36,8 +37,8 @@ const EASINGS = {
             close: {
               easing: 'ease',
               fill: 'both',
-              offset: 40,
-              duration: 180
+              duration: 180,
+              delay: 80
             }
           }
         }
