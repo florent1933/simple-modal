@@ -6,20 +6,20 @@ const EASINGS = {
       ANIMATIONS = {
         modal: {
           frames: [
-            { transform: 'translateZ(0) scale(0.75, 0.95)', opacity: 0 },
-            { transform: 'translateZ(0) scale(1, 1)', opacity: 1 }
+            { transform: 'translateZ(0) scale(0.8, 0.95)', opacity: 0 },
+            { transform: 'translateZ(0) scale(1)', opacity: 1 }
           ],
           opts: {
             open: {
-              easing: EASINGS.standard,
+              easing: EASINGS.decelerate,
               fill: 'both',
               duration: 150,
-              delay: 130,
+              delay: 150,
             },
             close: {
-              easing: EASINGS.standard,
+              easing: EASINGS.accelerate,
               fill: 'both',
-              duration: 120
+              duration: 90
             }
           }
         },
@@ -32,13 +32,13 @@ const EASINGS = {
             open: {
               easing: 'ease',
               fill: 'both',
-              duration: 270
+              duration: 300
             },
             close: {
               easing: 'ease',
               fill: 'both',
-              duration: 180,
-              delay: 80
+              duration: 250,
+              delay: 125
             }
           }
         }
