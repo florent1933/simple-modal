@@ -24,7 +24,7 @@
     "camelcase": 2,
     "new-cap": 0,
     "no-lonely-if": 2,
-    "space-after-keywords": 2,
+    "keyword-spacing": 2,
     "space-in-brackets": 0,
     "space-infix-ops": 2,
     "valid-jsdoc": 2,
