@@ -1,6 +1,5 @@
 # Simple Modal
 [![Build status][travis-badge]][travis-url] [![Bower dependencies][bowerdeps-badge]][bowerdeps-url] ![Version][bower-badge] ![Size][size-badge]
-<br/>[![Cross browser test status][browser-badges]][travis-url]
 
 Simple, style-agnostic modal element.
 
@@ -50,8 +49,14 @@ Property  | Type    | Default  | Description
 `noExit`  | Boolean | `false`  | Disable user exiting modal (manually call `.close()` method instead)
 
 
+Properties can either be set as attributes on the element, or imperitively with Javascript
+
 ```html
-<simple-modal title="My modal" no-exit></simple-modal> 
+<simple-modal title="My modal" no-exit></simple-modal>
+
+<script>
+    document.querySelector('simple-modal').active = true;
+</script>
 ```
 
 ## Methods 
@@ -118,4 +123,3 @@ MIT © [Simpla](https://www.simpla.io)
 [bowerdeps-badge]: https://img.shields.io/gemnasium/SimpleElements/simple-modal.svg
 [bowerdeps-url]: https://gemnasium.com/bower/simple-modal-element
 [size-badge]: https://badges.herokuapp.com/size/github/SimpleElements/simple-modal/master/simple-modal.html?gzip=true&color=blue
-[browser-badges]: https://badges.herokuapp.com/travis/SimpleElements/simple-modal/sauce/SimpleElements?labels=none
