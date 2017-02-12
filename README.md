@@ -10,6 +10,10 @@ Simple modal is a lightweight, performant, style-agnostic modal element.
     <script src="../webcomponentsjs/webcomponents-lite.js"></script>
     <link rel="import" href="simple-modal.html">
     <style>
+      body {
+        min-height: 300px
+      }
+      
       simple-modal {
         font-family: sans-serif;
       }
