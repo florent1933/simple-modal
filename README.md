@@ -1,7 +1,40 @@
 # Simple Modal
-[![Build status][travis-badge]][travis-url] [![Bower dependencies][bowerdeps-badge]][bowerdeps-url] ![Version][bower-badge] ![Size][size-badge]
+[![Build status][travis-badge]][travis-url] [![Bower dependencies][bowerdeps-badge]][bowerdeps-url] ![Version][bower-badge] ![Size][size-badge] [![Published][webcomponents-badge]][webcomponents-url]
 
 Simple modal is a lightweight, performant, style-agnostic modal element.
+
+<!---
+```
+<custom-element-demo>
+  <template>
+    <script src="../webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="simple-modal.html">
+    <style>
+      simple-modal {
+        font-family: sans-serif;
+      }
+    </style>
+    <next-code-block></next-code-block>
+  </template>
+</custom-element-demo>
+```
+-->
+```html
+<button id="button">open modal</button>
+
+<simple-modal id="modal" title="My modal">
+  My modal's content
+</simple-modal>
+
+<script>
+  var button = document.querySelector('#button'),
+      modal = document.querySelector('#modal');
+
+  button.addEventListener('click', function() {
+    modal.active = true;
+  });
+</script>
+```
 
 ## Installation & usage
 
@@ -120,3 +153,5 @@ MIT © [Simpla](https://www.simpla.io)
 [bowerdeps-badge]: https://img.shields.io/gemnasium/SimpleElements/simple-modal.svg
 [bowerdeps-url]: https://gemnasium.com/bower/simple-modal-element
 [size-badge]: https://badges.herokuapp.com/size/github/SimpleElements/simple-modal/master/simple-modal.html?gzip=true&color=blue
+[webcomponents-badge]: https://img.shields.io/badge/webcomponents.org-published-blue.svg
+[webcomponents-url]: https://www.webcomponents.org/element/SimpleElements/simple-drawer
