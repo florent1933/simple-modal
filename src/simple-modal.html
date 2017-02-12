@@ -20,7 +20,7 @@
 
       :host {
         position: fixed;
-        display: none;
+        display: flex;
         top: 0;
         right: 0;
         left: 0;
@@ -33,8 +33,8 @@
                  font-smoothing: antialiased;
       }
 
-      :host([visible]) {
-        display: flex;
+      :host([hidden]) {
+        display: none;
       }
 
       /* Click-to-escape target */
@@ -48,6 +48,17 @@
         background: var(--simple-modal-overlay, rgba(0,0,0, 0.2));
       }
 
+      :host(:not([visible])) .overlay {
+        opacity: 0;
+        transition: opacity 200ms ease;
+        transition-delay: 125ms;
+      }
+
+      :host([visible]) .overlay {
+        opacity: 1;
+        transition: opacity 300ms ease;
+      }
+
       .modal {
         display: inline-block;
         position: relative;
@@ -59,6 +70,21 @@
                     0 1px 18px 0 rgba(0, 0, 0, 0.12),
                     0 3px 5px -1px rgba(0, 0, 0, 0.4);
         @apply(--simple-modal);
+      }
+
+      :host(:not([visible])) .modal {
+        opacity: 0;
+        transform: translateZ(0) scale(0.8, 0.95);
+        transition: transform 180ms cubic-bezier(0.4, 0.0, 1, 1),
+                    opacity 100ms ease;
+      }
+
+      :host([visible]) .modal {
+        opacity: 1;
+        transform: translateZ(0) scale(1);
+        transition: transform 200ms cubic-bezier(0.0, 0.0, 0.2, 1),
+                    opacity 120ms ease;
+        transition-delay: 150ms
       }
 
       .modal__title {
@@ -94,13 +120,16 @@
       }
     </style>
 
-    <div class="overlay" id="overlay" on-tap="close"></div>
+    <div id="overlay"
+      class="overlay"
+      on-tap="_close"
+      on-transitionend="_hideAfterInactiveTransition">
+    </div>
 
     <div class="modal" id="modal">
       <iron-icon
-        id="close"
         class="modal__close"
-        on-tap="close"
+        on-tap="_close"
         icon="simple-modal:close"
         hidden$="[[noExit]]">
       </iron-icon>
@@ -113,19 +142,49 @@
     </div>
   </template>
 
-  <script src="../web-animations-js/web-animations.min.js"></script>
   <script>
-    import animation from './behaviors/animation';
-
-    const CONFIRM_CLASS = 'simple-modal-confirm';
-
     class SimpleModal {
       beforeRegister() {
         this.is = 'simple-modal';
 
         this.properties = {
+
           /**
-           * Title of the modal
+           * State of the modal
+           * @type {Boolean}
+           */
+          active: {
+            type: Boolean,
+            notify: true,
+            value: false
+          },
+
+          /**
+           * Whether modal is visible
+           * Used for transitions
+           * @type {Boolean}
+           */
+          visible: {
+            type: Boolean,
+            reflectToAttribute: true,
+            readonly: true,
+            value: false
+          },
+
+          /**
+           * Whether modal is hidden
+           * Used for transitions
+           * @type {Boolean}
+           */
+          hidden: {
+            type: Boolean,
+            reflectToAttribute: true,
+            readonly: true,
+            value: true
+          },
+
+          /**
+           * Title to show on modal
            * @type {String}
            */
           title: {
@@ -134,106 +193,86 @@
           },
 
           /**
-           * Don't allow the modal to exit unless confirm clicked
+           * Disable all built-in exit toggles
            * @type {Boolean}
            */
-          noExit: Boolean,
+          noExit: Boolean
+        };
 
-          /**
-           * Whether modal is active or not
-           * @type {Boolean}
-           */
-          active: {
-            type: Boolean,
-            notify: true,
-            observer: '_activeChanged',
-            value: false
-          }
-        }
-      }
-
-      get behaviors() {
-        return [ animation ];
+        this.observers = [
+          '_toggleVisibility(active)',
+          '_closeOnEscape(active)',
+          '_lockBodyWhenActive(active)'
+        ];
       }
 
       /**
-       * Observer for the active property, fires events on change
-       * @param  {Boolean} active   Current state of the active property
-       * @param  {Boolean} previous Previous state of the active property
-       * @return {undefined}
-       */
-      _activeChanged(active, previous) {
-        if (active) {
-          this.animateModalOpen();
-          this._toggleBodyLock(true);
-          this.fire('opened');
-        } else if (previous) {
-          this.animateModalClosed();
-          this._toggleBodyLock(false);
-          this.fire('closed');
-        }
-      }
-
-      /**
-       * Convinience method for setting active to true
-       * @return {undefined}
-       */
-      open() {
-        this.active = true;
-      }
-
-      /**
-       * Convinience method for setting active to false
-       * @return {undefined}
-       */
-      close() {
-        if (!this.noExit) {
-          this.active = false;
-        }
-      }
-
-      /**
-       * Get the internal modal element
+       * Returns the internal modal element
        * @return {HTMLNode} Internal modal element
        */
       getModal() {
         return this.$.modal;
       }
 
-
       /**
-       * Toggles locking the <body> element with overflow hidden
-       * @param  {Boolean} lock Whether to lock or unlock the body
+       * Toggle visibility of modal based on active state
+       * @param  {Boolean} active Value of the active property
        * @return {undefined}
        */
-      _toggleBodyLock(lock) {
-        let body = document.body;
+      _toggleVisibility(active) {
+        if (active) {
+          this.hidden = false;
 
-        if (lock) {
-          body.style.overflow = 'hidden';
+          Polymer.RenderStatus
+            .afterNextRender(this, () => this.visible = true);
         } else {
-          body.style.overflow = '';
+          this.visible = false;
         }
       }
 
       /**
-       * Close the modal on escape key press
+       * Set hidden if visible false at end of transitions
+       * @param  {Event} e Transitionend event
        * @return {undefined}
        */
-      _closeOnEscape() {
-        document.addEventListener('keyup', (e) => {
-          if (e.keyCode === 27) {
-            this.close();
-          }
-        });
+      _hideAfterInactiveTransition(e) {
+        if (!this.active) {
+          this.hidden = true;
+        }
       }
 
       /**
-       * Initialise close listeners on element attach
+       * Disable scrolling while modal is open
+       * @param  {Boolean} active Value of the active property
        * @return {undefined}
        */
-      attached() {
-        this._closeOnEscape();
+      _lockBodyWhenActive(active) {
+        document.body.style.overflow = active ? 'hidden' : '';
+      }
+
+      _close() {
+        if (!this.noExit) {
+          this.active = false;
+        }
+      }
+
+      /**
+       * Close the modal on escape key press when active
+       * @param {Boolean} active Value of the active property
+       * @return {undefined}
+       */
+      _closeOnEscape(active) {
+        let closeIfEscape = (e) => {
+          if (e.keyCode === 27) {
+            this._close();
+          }
+        };
+
+        if (active) {
+          document.addEventListener('keydown', closeIfEscape);
+        } else {
+          document.removeEventListener('keydown', closeIfEscape);
+        }
       }
     }
     Polymer(SimpleModal);

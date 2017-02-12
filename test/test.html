@@ -6,28 +6,9 @@
     <script src="../../webcomponentsjs/webcomponents.min.js"></script>
     <script src="../../web-component-tester/browser.js"></script>
     <script src="../../test-fixture/test-fixture-mocha.js"></script>
-    <link rel="import" href="../../test-fixture/test-fixture.html">
-
-    <!-- Utility for flushing animations in tests -->
-    <script src="../../web-animations-js/web-animations-next.min.js"></script>
-    <script>
-      window.flushAnimations = function() {
-        document.timeline.getAnimations().forEach(function(animation) {
-          animation.finish();
-        });
-      }
-    </script>
 
     <!-- Import the element to test -->
     <link rel="import" href="../simple-modal.html">
-
-    <!-- Setup fixtures -->
-    <script>
-      (function() {
-        window.fixtures = window.fixtures || {};
-        window.fixtures['simple-modal'] = {};
-      })();
-    </script>
 
   </head>
   <body>
@@ -40,9 +21,7 @@
       describe('<simple-modal>', function() {
 
         var component,
-            componentFixtures;
-
-        componentFixtures = window.fixtures;
+            ANIMATION_DURATION = 500;
 
         beforeEach(function() {
           component = fixture('default');
@@ -54,47 +33,55 @@
 
         it('becomes visible when active true', function() {
           component.active = true;
-          expect(component.visible).to.be.true;
+          setTimeout(function() {
+            expect(component.visible).to.be.true;
+            expect(component.hidden).to.be.false;
+          }, 1)
         });
 
         describe('closing', function() {
 
-          it('makes visible false when active false', function() {
+          it('hides when inactive', function() {
             component.active = true;
-            window.flushAnimations();
 
             setTimeout(function() {
               component.active = false;
-              window.flushAnimations();
-            }, 0);
-
-            setTimeout(function() {
-              expect(component.visible).to.be.false;
-            }, 0);
+              setTimeout(function() {
+                expect(component.visible).to.be.false;
+                expect(component.hidden).to.be.true;
+              }, ANIMATION_DURATION)
+            }, ANIMATION_DURATION);
           });
 
           it('closes on overlay tap', function() {
             component.active = true;
-            window.flushAnimations();
 
             setTimeout(function() {
               component.$.overlay.click();
               expect(component.active).to.be.false;
-            }, 0);
+            }, ANIMATION_DURATION);
           });
 
           it('closes on escape key', function() {
             component.active = true;
-            window.flushAnimations();
 
             setTimeout(function() {
-              component.fire('keyup', { keyCode: 27 }, { node: document.body });
+              component.fire('keydown', { keyCode: 27 }, { node: document.body });
               expect(component.active).to.be.false;
-            }, 0);
+            }, ANIMATION_DURATION);
           });
 
-        });
+          it('does not close on overlay tap or escape key if noExit true', function() {
+            component.active = true;
+            component.noExit = true;
 
+            setTimeout(function() {
+              component.$.overlay.click();
+              component.fire('keydown', { keyCode: 27 }, { node: document.body });
+              expect(component.active).to.be.true;
+            }, ANIMATION_DURATION);
+          });
+        });
       });
     </script>
   </body>

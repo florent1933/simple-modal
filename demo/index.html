@@ -7,7 +7,6 @@
 
      <!-- Include polyfills -->
     <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
-    <script src="../../web-animations-js/web-animations-next.min.js"></script>
 
     <!-- Use shadow DOM if available -->
     <script>
@@ -28,12 +27,15 @@
     <button id="button">open modal</button>
 
     <simple-modal id="modal" title="My Modal">
-      My modal's content lorem
+      My modal's content
     </simple-modal>
 
     <script>
-      document.querySelector('#button').addEventListener('click', function() {
-        document.querySelector('#modal').open();
+      var button = document.querySelector('#button'),
+          modal = document.querySelector('#modal');
+
+      button.addEventListener('click', function() {
+        modal.active = true;
       });
     </script>
 

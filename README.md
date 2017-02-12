@@ -1,7 +1,7 @@
 # Simple Modal
 [![Build status][travis-badge]][travis-url] [![Bower dependencies][bowerdeps-badge]][bowerdeps-url] ![Version][bower-badge] ![Size][size-badge]
 
-Simple, style-agnostic modal element.
+Simple modal is a lightweight, performant, style-agnostic modal element.
 
 ## Installation & usage
 
@@ -17,26 +17,27 @@ Import it into the `<head>` of your page
 <link rel="import" href="/bower_components/simple-modal/simple-modal.html">
 ```
 
-Then use it in your project, and call `open()` on it to show it.
+Then use it in your project, and toggle the `active` property to open/close it.
 
 ```html
 <simple-modal id="modal"></simple-modal>
 
 <script>
   // Open modal
-  document.querySelector('#modal').open();
+  document.querySelector('#modal').active = true;
 </script>
 ```
 
 ### Polyfills for cross-browser support
 
-Simple callout relies on several emerging standards, and you will need to include polyfills for cross-browser support:
+Simple modal relies on emerging standards, for full cross-browser support include the [Web Components Lite][webcomponents] polyfill.
 
-- [Web Components Lite][webcomponents] for all non-chrome browsers
-- A Promise polyfill, like [es6-promise][promise], for IE 10 & 11 support.
+```sh
+bower i webcomponentsjs --save
+```
 
 ```html
-<script src="/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+<script src="/bower_components/webcomponentsjs/web-components-lite.js"></script>
 ```
 
 
@@ -44,27 +45,24 @@ Simple callout relies on several emerging standards, and you will need to includ
 
 Property  | Type    | Default  | Description                                                    
 --------- | ------- | -------- | ------------                                                   
-`active`  | Boolean | `false`  | Controls whether the modal is active or not                    
-`title`   | String  | `''`     | Optional title to show on the modal                            
-`noExit`  | Boolean | `false`  | Disable user exiting modal (manually call `.close()` method instead)
-
+`active`  | Boolean | `false`  | State of the modal, change to open/close
+`title`   | String  | `''`     | Optional title to show on the modal
+`noExit`  | Boolean | `false`  | Disable user closing modal (change `active` manually instead)
 
 Properties can either be set as attributes on the element, or imperitively with Javascript
 
 ```html
-<simple-modal title="My modal" no-exit></simple-modal>
+<simple-modal no-exit></simple-modal>
 
 <script>
-    document.querySelector('simple-modal').active = true;
+    document.querySelector('simple-modal').title = 'My modal';
 </script>
 ```
 
 ## Methods 
 
 Method       | Arguments | Description                              
------------- | --------- | ------------                             
-`open()`     | `none`    | Utility method to open the modal         
-`close()`    | `none`    | Utility method to close the modal        
+------------ | --------- | ------------                               
 `getModal()` | `none`    | Returns the internal modal HTML element
 
 ## Styling
@@ -75,7 +73,7 @@ Property                      | Default            | Description
 `--simple-modal-overlay`      | `rgba(0,0,0, 0.4)` | Color of the screen overlay when modal active                         
 `--simple-modal-padding`      | `40px`             | Padding inside the modal dialog               
 `--simple-modal-close-size`   | `14px`             | Size of the close button                      
-`--simple-modal-close-color`  | `rgba(0,0,0,0.45)`  | Color of the close button                     
+`--simple-modal-close-color`  | `rgba(0,0,0,0.45)` | Color of the close button                     
 
 Apply properties on simple-modal
 
@@ -87,7 +85,7 @@ simple-modal {
 
 Mixin                  | Description                   
 ---------------------- | ------------                  
-`--simple-modal`       | Style the modal dialog itself 
+`--simple-modal`       | Style the modal dialog 
 `--simple-modal-title` | Style the modal title         
 `--simple-modal-close` | Style the modal close button  
 
@@ -104,10 +102,9 @@ simple-modal {
 
 ## Events
 
-Event     | Description             
-----------| ------------            
-`opened`  | Fired when modal opens  
-`closed`  | Fired when modal closed 
+Event             | Description             
+------------------| ------------            
+`active-changed`  | Fired when the `active` property changes - active value is stored in `detail.value`
 
 -- 
 
