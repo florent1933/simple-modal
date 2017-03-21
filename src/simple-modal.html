@@ -247,7 +247,9 @@
        * @return {undefined}
        */
       _lockBodyWhenActive(active) {
-        document.body.style.overflow = active ? 'hidden' : '';
+        // Disable, it prevent body to be unscrollable after redirect url
+        // Hack for angular2 when switching view
+        // document.body.style.overflow = active ? 'hidden' : ''; 
       }
 
       _close() {
