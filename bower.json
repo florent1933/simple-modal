@@ -13,7 +13,7 @@
   ],
   "main": "simple-modal.html",
   "license": "MIT",
-  "homepage": "https://github.com/SimpleElements/simple-modal/",
+  "homepage": "https://github.com/florent1933/simple-modal/",
   "ignore": [
     "*",
     "!*.html",
